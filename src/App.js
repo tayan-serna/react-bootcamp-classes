@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Title from './Title';
 import CardList from './CardList';
+import Detail from './Detail';
 
 import './index.scss';
 
@@ -13,14 +14,7 @@ const App = () => {
       <section className="container">
         <Router>
           <Route exact path="/" component={CardList} />
-          <Route
-            path="/details/:id"
-            component={({
-              match: {
-                params: { id }
-              }
-            }) => <div>{id}</div>}
-          />
+          <Route path="/details/:id" component={Detail} />
         </Router>
       </section>
     </section>
