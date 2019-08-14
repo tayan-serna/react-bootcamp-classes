@@ -1,0 +1,115 @@
+$color-green: #97ce4c;
+$colore-yellow: #f0e14a;
+$color-cream: #e4a788;
+$color-brown: #44281d;
+$color-pink: #e89ac7;
+$color-blue: #69c8ec;
+$color-white: #fff;
+
+$space-separation: 1rem;
+$space-separation-big: $space-separation * 2;
+$space-separation-huge: $space-separation * 4;
+$space-separation-little: $space-separation / 2;
+
+html {
+  margin: 0;
+  padding: 0;
+  background-color: $color-green;
+  height: 100vh;
+}
+.title {
+  color: $color-white;
+  text-align: center;
+  font-size: $space-separation-big;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .detail {
+    text-align: center;
+    padding: $space-separation-big;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .image-container {
+      position: relative;
+    }
+
+    &__favorite {
+      position: absolute;
+      right: 0;
+      bottom: 50px;
+      font-size: $space-separation-huge;
+    }
+
+    &__back {
+      position: absolute;
+      cursor: pointer;
+    }
+
+    &__image {
+      margin-bottom: $space-separation-big;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    &__details {
+      width: 500px;
+    }
+
+    &__item {
+      padding: $space-separation-little $space-separation-big;
+      border-top: 2px solid;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__item:last-child {
+      border-bottom: 2px solid;
+    }
+  }
+
+  .list-container {
+    width: 100%;
+
+    .search-container {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+
+      .search-input {
+        width: 30%;
+      }
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      height: calc(100vh - 250px);
+      overflow-y: scroll;
+
+      .card {
+        background-color: $color-white;
+        padding: $space-separation;
+        list-style: none;
+        text-align: center;
+        cursor: pointer;
+        display: inline-block;
+        margin: $space-separation;
+
+        &__image {
+          width: 200px;
+        }
+
+        &__info {
+          padding: $space-separation-little;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
