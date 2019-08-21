@@ -5,53 +5,45 @@ import { Link } from 'react-router-dom';
 import Input from '../Input';
 import Card from '../Card';
 
+import FilterContext from '../Context/FilterContext';
+
 const RickAndMortyAPI = 'https://rickandmortyapi.com/api/character/';
 
 class CardList extends React.Component {
-  state = {
-    value: '',
-    characters: [],
-    charactersFiltered: []
-  };
-
   componentDidMount() {
-    axios.get(RickAndMortyAPI).then(res => {
-      this.setState({
-        characters: res.data.results,
-        charactersFiltered: res.data.results
+    if (!this.context.characters.length) {
+      axios.get(RickAndMortyAPI).then(res => {
+        this.context.setFilterObject({
+          characters: res.data.results,
+          filteredCharacters: res.data.results
+        });
       });
-    });
+    }
   }
 
   handleChange = e => {
     e.persist();
-    const charactersFiltered = this.state.characters.filter(chart =>
-      chart.name.toLowerCase().includes(e.target.value)
-    );
-    console.log(typeof e.target.value);
-    console.log(charactersFiltered);
-    this.setState(() => ({
-      value: e.target.value,
-      charactersFiltered
-    }));
+    const filteredCharacters = e.target.value
+      ? this.context.characters.filter(chart =>
+          chart.name.toLowerCase().includes(e.target.value.toLowerCase())
+        )
+      : this.context.characters;
+    this.context.setFilterObject({
+      filterValue: e.target.value,
+      filteredCharacters
+    });
   };
 
   render() {
-    const { charactersFiltered } = this.state;
+    const { filteredCharacters, filterValue } = this.context;
     return (
       <div className="list-container">
-        <Input handleChange={this.handleChange} />
+        <Input handleChange={this.handleChange} value={filterValue} />
         <div>
           <ul className="card-container">
-            {charactersFiltered.map(chart => (
+            {filteredCharacters.map(chart => (
               <Link to={`details/${chart.id}`} key={chart.id}>
-                <Card name={chart.name} url={chart.image}>
-                  {name => {
-                    console.log(name);
-
-                    return <button>{name}</button>;
-                  }}
-                </Card>
+                <Card name={chart.name} url={chart.image} />
               </Link>
             ))}
           </ul>
@@ -60,5 +52,7 @@ class CardList extends React.Component {
     );
   }
 }
+
+CardList.contextType = FilterContext;
 
 export default CardList;
