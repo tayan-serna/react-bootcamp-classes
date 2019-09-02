@@ -9,8 +9,11 @@ class Card extends React.Component {
           className="card__image"
           src={this.props.url}
           alt={this.props.name}
+          data-testid="card-image"
         />
-        <div className="card__info">{this.props.name}</div>
+        <div data-testid="card-info" className="card__info">
+          {this.props.name}
+        </div>
       </li>
     );
   }

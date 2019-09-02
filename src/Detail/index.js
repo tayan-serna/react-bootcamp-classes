@@ -56,9 +56,15 @@ export default function Detail({ match, history }) {
           src={character.image}
           className="detail__image"
           onDoubleClick={setFavorite}
+          data-testid="detail-image"
         />
         {favoriteList[character.id] && (
-          <span role="img" aria-label="star" className="detail__favorite">
+          <span
+            role="img"
+            aria-label="star"
+            className="detail__favorite"
+            data-testid="detail-favorite"
+          >
             ⭐
           </span>
         )}
